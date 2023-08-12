@@ -1,7 +1,7 @@
 import dbPool from "../utils/db.js";
 
 export const getData = () => {
-  const sql = "SELECT user_id, name, email, created_at FROM users";
+  const sql = "SELECT user_id, name, email, password, created_at FROM users";
   const result = dbPool.query(sql);
 
   return result;
@@ -45,4 +45,9 @@ export const getDataById = (id) => {
   const result = dbPool.query(sql, [id]);
 
   return result;
+};
+
+export const getDataByEmail = (email) => {
+  const sql = "SELECT user_id, email, password FROM users WHERE email = ?";
+  return dbPool.query(sql, email);
 };
