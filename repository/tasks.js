@@ -20,7 +20,7 @@ export const createData = (user_id, task_name, is_completed) => {
   let createdAt = new Date();
   const sql =
     "INSERT INTO tasks (user_id, task_name, is_completed, created_at) VALUE(?, ?, ?,?)";
-  const value = [user_id, task_name, is_completed, createdAt];
+  const value = [user_id, task_name, is_completed ? 1 : 0, createdAt];
 
   return dbPool.query(sql, value);
 };
@@ -29,7 +29,7 @@ export const updateData = (user_id, task_name, is_completed, id) => {
   let updatedAt = new Date();
   const sql =
     "UPDATE tasks SET user_id = ?, task_name = ?, is_completed=?, updated_at = ? WHERE task_id = ?";
-  const value = [user_id, task_name, is_completed, updatedAt, id];
+  const value = [user_id, task_name, is_completed ? 1 : 0, updatedAt, id];
 
   return dbPool.query(sql, value);
 };
